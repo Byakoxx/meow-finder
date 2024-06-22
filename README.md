@@ -1,4 +1,4 @@
-# myapp
+# 🐾 Meow Finder 🐾
 
 A new Flutter project.
 

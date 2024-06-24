@@ -1,17 +1,27 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:meow_finder/widgets/flag.dart';
 import 'package:meow_finder/widgets/intelligence_stars.dart';
-import '../models/cat_breed.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class CatItem extends StatelessWidget {
-  final CatBreed catBreed;
-
-  const CatItem({super.key, required this.catBreed});
+class SkeletonCatList extends StatelessWidget {
+  const SkeletonCatList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool enabled = true;
+
+    return Skeletonizer(
+      enabled: enabled,
+      enableSwitchAnimation: true,
+      child: ListView.builder(
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return _container();
+        },
+      ),
+    );
+  }
+
+  _container() {
     return Container(
       margin: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
@@ -30,12 +40,13 @@ class CatItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  catBreed.name ?? 'Sin nombre',
+                const Text(
+                  'Sin nombre',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -47,9 +58,9 @@ class CatItem extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () => print('Editar'),
-                        child: Icon(Icons.more_horiz),
+                        child: const Icon(Icons.more_horiz),
                       ),
-                      SizedBox(width: 5.0),
+                      const SizedBox(width: 5.0),
                     ],
                   ),
                 ),
@@ -57,17 +68,17 @@ class CatItem extends StatelessWidget {
             ),
           ),
           FadeInImage(
-            placeholder: AssetImage('assets/images/meowding.gif'),
-            image: NetworkImage(
-              'https://cdn2.thecatapi.com/images/${catBreed.referenceImageId}.jpg',
+            placeholder: const AssetImage('assets/images/meowding.gif'),
+            image: const NetworkImage(
+              'https://t3.ftcdn.net/jpg/02/61/08/76/360_F_261087622_8eRI0TAwDAyabS1b0Uifx1wKqHzA41r3.jpg',
             ),
             width: double.infinity,
             fit: BoxFit.cover,
             height: 200,
             imageErrorBuilder: (BuildContext context, Object exception,
                 StackTrace? stackTrace) {
-              return Image.asset(
-                'assets/images/img_cat_not_available.jpg',
+              return Image.network(
+                'https://t3.ftcdn.net/jpg/02/61/08/76/360_F_261087622_8eRI0TAwDAyabS1b0Uifx1wKqHzA41r3.jpg',
                 width: double.infinity,
                 fit: BoxFit.cover,
                 height: 200,
@@ -75,14 +86,17 @@ class CatItem extends StatelessWidget {
             },
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flag(
-                  countryCode: catBreed.countryCode!,
+                Container(
+                  width: 30.0,
+                  height: 30.0,
+                  decoration: const BoxDecoration(),
+                  child: const Text('Cargando'),
                 ),
-                IntelligenceStars(intelligenceLevel: catBreed.intelligence!)
+                const IntelligenceStars(intelligenceLevel: 5)
               ],
             ),
           ),

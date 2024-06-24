@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final catBreed = catBreedFromJson(jsonString);
-
 import 'dart:convert';
 
 List<CatBreed> catBreedFromJson(String str) =>

@@ -1,6 +1,6 @@
 import 'package:meow_finder/providers/cat_provider.dart';
-import 'package:meow_finder/screens/cat_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:meow_finder/screens/spash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const CatApp());
@@ -20,7 +20,7 @@ class CatApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: CatListScreen(),
+        home: const SplashScreen(),
         /*routes: {
           '/cat-list': (context) => const CatListScreen(),
         },*/

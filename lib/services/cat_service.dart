@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-
 import 'package:meow_finder/models/cat_breed.dart';
 
 class ApiService {
@@ -15,10 +14,8 @@ class ApiService {
       final response = await http.get(Uri.parse(_baseUrl), headers: _headers);
 
       if (response.statusCode == 200) {
-        final catBreed = catBreedFromJson(response.body);
-
-
-        return catBreed;
+        final List<CatBreed> catBreeds = catBreedFromJson(response.body);
+        return catBreeds;
       } else {
         throw Exception('Failed to load cat breeds');
       }

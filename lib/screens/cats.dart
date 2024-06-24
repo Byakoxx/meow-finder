@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:meow_finder/providers/cat_provider.dart';
-import 'package:meow_finder/services/cat_service.dart';
+import 'package:meow_finder/providers/cat.dart';
+
+import 'package:meow_finder/services/cat.dart';
 import 'package:meow_finder/widgets/app_bar.dart';
 import 'package:meow_finder/widgets/cat_list.dart';
-import 'package:meow_finder/widgets/skeleton_cat_list.dart';
 import 'package:provider/provider.dart';
-import '../widgets/cat_item.dart';
 
-class CatListScreen extends StatelessWidget {
-  CatListScreen({super.key});
+class CatsScreen extends StatelessWidget {
+  CatsScreen({super.key});
 
   final ApiService apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
     final catProvider = Provider.of<CatProvider>(context);
+
     return Scaffold(
       body: SafeArea(
         child: GestureDetector(
@@ -33,7 +33,9 @@ class CatListScreen extends StatelessWidget {
               children: [
                 const CustomAppBar(),
                 Expanded(
-                  child: CatListWidget(),
+                  child: RefreshIndicator(
+                      onRefresh: () => catProvider.fetchCats(),
+                      child: const CatListWidget()),
                 ),
               ],
             ),

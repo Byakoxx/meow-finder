@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+
 import 'package:meow_finder/models/cat_breed.dart';
 
 class ApiService {
@@ -20,7 +21,6 @@ class ApiService {
         throw Exception('Failed to load cat breeds');
       }
     } catch (error) {
-      print('🤡 $error');
       throw Exception('Failed to load cat breeds');
     }
   }

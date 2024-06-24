@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:meow_finder/providers/cat_provider.dart';
-import 'package:meow_finder/widgets/cat_item.dart';
-import 'package:meow_finder/widgets/skeleton_cat_list.dart';
+
 import 'package:provider/provider.dart';
 
+import 'package:meow_finder/providers/cat.dart';
+import 'package:meow_finder/widgets/skeleton_cat_list.dart';
+
 class CatListWidget extends StatefulWidget {
+  const CatListWidget({super.key});
+
   @override
-  _CatListWidgetState createState() => _CatListWidgetState();
+  CatListWidgetState createState() => CatListWidgetState();
 }
 
-class _CatListWidgetState extends State<CatListWidget> {
+class CatListWidgetState extends State<CatListWidget> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<CatProvider>().fetchCats());
+    Future.microtask(() async {
+      final catProvider = context.read<CatProvider>();
+      catProvider.setListKey(_listKey);
+      await catProvider.fetchCats();
+    });
   }
 
   @override
@@ -33,12 +42,11 @@ class _CatListWidgetState extends State<CatListWidget> {
               child:
                   Text('No cat breeds found with this name / description 😿'));
         }
-        return ListView.builder(
-          itemCount: catProvider.cats.length,
-          itemBuilder: (context, index) {
-            print("hay ${catProvider.cats.length} gatos por mostrar");
-            final catBreed = catProvider.cats[index];
-            return CatItem(catBreed: catBreed);
+        return AnimatedList(
+          key: _listKey,
+          initialItemCount: catProvider.cats.length,
+          itemBuilder: (context, index, animation) {
+            return catProvider.buildItem(catProvider.cats[index], animation);
           },
         );
       },

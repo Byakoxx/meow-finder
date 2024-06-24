@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meow_finder/widgets/intelligence_stars.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
+
+import 'package:meow_finder/widgets/intelligence_stars.dart';
 
 class SkeletonCatList extends StatelessWidget {
   const SkeletonCatList({super.key});

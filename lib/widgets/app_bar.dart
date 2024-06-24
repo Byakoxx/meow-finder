@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:meow_finder/widgets/input_search.dart';
 
 class CustomAppBar extends StatelessWidget {

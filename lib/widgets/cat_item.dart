@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+
 import 'package:meow_finder/widgets/flag.dart';
+import 'package:meow_finder/models/cat_breed.dart';
 import 'package:meow_finder/widgets/intelligence_stars.dart';
-import '../models/cat_breed.dart';
 
 class CatItem extends StatelessWidget {
   final CatBreed catBreed;
@@ -30,13 +29,14 @@ class CatItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   catBreed.name ?? 'Sin nombre',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -45,37 +45,48 @@ class CatItem extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      GestureDetector(
-                        onTap: () => print('Editar'),
-                        child: Icon(Icons.more_horiz),
+                      IconButton(
+                        icon: const Icon(Icons.more_horiz),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/detail',
+                            arguments: catBreed,
+                          );
+                        },
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
                       ),
-                      SizedBox(width: 5.0),
+                      const SizedBox(width: 5.0),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          FadeInImage(
-            placeholder: AssetImage('assets/images/meowding.gif'),
-            image: NetworkImage(
-              'https://cdn2.thecatapi.com/images/${catBreed.referenceImageId}.jpg',
+          Hero(
+            tag: 'cat-${catBreed.id}',
+            child: FadeInImage(
+              placeholder: const AssetImage('assets/images/meowding.gif'),
+              image: NetworkImage(
+                'https://cdn2.thecatapi.com/images/${catBreed.referenceImageId}.jpg',
+              ),
+              width: double.infinity,
+              fit: BoxFit.cover,
+              height: 200,
+              imageErrorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return Image.asset(
+                  'assets/images/img_cat_not_available.jpg',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  height: 200,
+                );
+              },
             ),
-            width: double.infinity,
-            fit: BoxFit.cover,
-            height: 200,
-            imageErrorBuilder: (BuildContext context, Object exception,
-                StackTrace? stackTrace) {
-              return Image.asset(
-                'assets/images/img_cat_not_available.jpg',
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: 200,
-              );
-            },
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

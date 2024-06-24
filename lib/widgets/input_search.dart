@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
-import 'package:meow_finder/providers/cat_provider.dart';
+
+import 'package:meow_finder/providers/cat.dart';
 
 class InputSearch extends StatelessWidget {
   final String hintText;

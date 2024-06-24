@@ -10,13 +10,15 @@ class InputSearch extends StatelessWidget {
 
   const InputSearch({
     super.key,
-    this.hintText = 'Search...',
+    this.hintText = 'Search breedname / description',
     this.onSubmitted,
   });
 
   @override
   Widget build(BuildContext context) {
     final catProvider = Provider.of<CatProvider>(context);
+    final theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextField(
@@ -30,27 +32,25 @@ class InputSearch extends StatelessWidget {
                 )
               : null,
           hintText: hintText,
+          hintStyle: TextStyle(
+              color: theme.textTheme.displayMedium?.color?.withOpacity(0.6)),
           filled: true,
           fillColor: Colors.grey[200],
           contentPadding:
               const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Colors.grey.shade300, width: 2.0),
-          ),
+          enabledBorder: theme.inputDecorationTheme.border,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide:
-                BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
+            borderSide: BorderSide(color: theme.primaryColor, width: 2.0),
           ),
         ),
         onChanged: (text) {
           catProvider.searchCats(text);
         },
         onSubmitted: (text) => onSubmitted?.call(),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16.0,
-          color: Colors.black,
+          color: theme.textTheme.displayMedium?.color,
         ),
       ),
     );

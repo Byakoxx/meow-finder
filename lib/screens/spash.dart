@@ -13,7 +13,6 @@ class SplashScreen extends StatelessWidget {
     return FlutterSplashScreen.fadeIn(
       backgroundColor: Colors.white,
       childWidget: SizedBox(
-        height: MediaQuery.of(context).size.width * 0.9,
         width: MediaQuery.of(context).size.width * 0.9,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,16 +22,14 @@ class SplashScreen extends StatelessWidget {
               frameRate: const FrameRate(60 * 0.64),
               repeat: false,
             ),
+            const SizedBox(height: 20.0),
             const Text(
               '🐾 Catbreed 🐾',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30.0),
             ),
           ],
         ),
       ),
-      onAnimationEnd: () => debugPrint("On Fade In End"),
       nextScreen: CatsScreen(),
       asyncNavigationCallback: () async {
         print('Send Logs');

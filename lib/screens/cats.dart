@@ -13,7 +13,7 @@ class CatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catProvider = Provider.of<CatProvider>(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: SafeArea(
@@ -25,20 +25,25 @@ class CatsScreen extends StatelessWidget {
               FocusScope.of(context).unfocus();
             }
           },
-          child: Container(
-            decoration: const BoxDecoration(color: Colors.white),
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              children: [
-                const CustomAppBar(),
-                Expanded(
-                  child: RefreshIndicator(
-                      onRefresh: () => catProvider.fetchCats(),
-                      child: const CatListWidget()),
+          child: Consumer<CatProvider>(
+            builder: (_, catProvider, __) {
+              return Container(
+                decoration: BoxDecoration(color: theme.scaffoldBackgroundColor),
+                height: double.infinity,
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    const CustomAppBar(),
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () => catProvider.fetchCats(),
+                        child: const CatListWidget(),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

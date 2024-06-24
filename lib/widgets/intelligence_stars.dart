@@ -23,9 +23,14 @@ class IntelligenceStars extends StatelessWidget {
       );
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: stars,
+    return Column(
+      children: [
+        const Text('Intelligence'),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: stars,
+        ),
+      ],
     );
   }
 }

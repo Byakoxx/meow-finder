@@ -144,7 +144,7 @@ class CatDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Más información',
+                          'More information',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 12.0),

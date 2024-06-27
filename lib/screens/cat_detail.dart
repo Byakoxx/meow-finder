@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -87,11 +88,18 @@ class CatDetail extends StatelessWidget {
                           Text('Basic Information',
                               style: Theme.of(context).textTheme.titleLarge),
                           const SizedBox(height: 8.0),
-                          _buildInfoRow(
-                              'Weight', '${catBreed.weight?.metric} kg'),
-                          _buildInfoRow('Origin', catBreed.origin ?? 'Unknown'),
-                          _buildInfoRow(
-                              'Life expectancy', '${catBreed.lifeSpan} years'),
+                          _BuildInfoRow(
+                            label: 'Weight',
+                            value: '${catBreed.weight?.metric} kg',
+                          ),
+                          _BuildInfoRow(
+                            label: 'Origin',
+                            value: catBreed.origin ?? 'Unknown',
+                          ),
+                          _BuildInfoRow(
+                            label: 'Life expectancy',
+                            value: '${catBreed.lifeSpan} years',
+                          ),
                         ],
                       ),
                     ),
@@ -125,16 +133,26 @@ class CatDetail extends StatelessWidget {
                     initiallyExpanded: true,
                     title: const Text('Characteristics'),
                     children: [
-                      _buildCharacteristicBar(
-                          'Adaptability', catBreed.adaptability ?? 0),
-                      _buildCharacteristicBar(
-                          'Level of Affection', catBreed.affectionLevel ?? 0),
-                      _buildCharacteristicBar(
-                          'Child Friendly', catBreed.childFriendly ?? 0),
-                      _buildCharacteristicBar(
-                          'Dog Friendly', catBreed.dogFriendly ?? 0),
-                      _buildCharacteristicBar(
-                          'Energy Level', catBreed.energyLevel ?? 0),
+                      _BuildCharacteristicBar(
+                        label: 'Adaptability',
+                        value: catBreed.adaptability ?? 0,
+                      ),
+                      _BuildCharacteristicBar(
+                        label: 'Level of Affection',
+                        value: catBreed.affectionLevel ?? 0,
+                      ),
+                      _BuildCharacteristicBar(
+                        label: 'Child Friendly',
+                        value: catBreed.childFriendly ?? 0,
+                      ),
+                      _BuildCharacteristicBar(
+                        label: 'Dog Friendly',
+                        value: catBreed.dogFriendly ?? 0,
+                      ),
+                      _BuildCharacteristicBar(
+                        label: 'Energy Level',
+                        value: catBreed.energyLevel ?? 0,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16.0),
@@ -151,13 +169,22 @@ class CatDetail extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            _buildLinkButton(
-                                'Wikipedia', catBreed.wikipediaUrl, context),
-                            _buildLinkButton('CFA', catBreed.cfaUrl, context),
-                            _buildLinkButton(
-                                'Vetstreet', catBreed.vetstreetUrl, context),
-                            _buildLinkButton(
-                                'VCA', catBreed.vcahospitalsUrl, context),
+                            _BuildLinkButton(
+                              label: 'Wikipedia',
+                              url: catBreed.wikipediaUrl!,
+                            ),
+                            _BuildLinkButton(
+                              label: 'CFA',
+                              url: catBreed.cfaUrl!,
+                            ),
+                            _BuildLinkButton(
+                              label: 'Vetstreet',
+                              url: catBreed.vetstreetUrl!,
+                            ),
+                            _BuildLinkButton(
+                              label: 'VCA',
+                              url: catBreed.vcahospitalsUrl!,
+                            ),
                           ],
                         ),
                       ],
@@ -171,8 +198,19 @@ class CatDetail extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildInfoRow(String label, String value) {
+class _BuildInfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _BuildInfoRow({
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -184,8 +222,19 @@ class CatDetail extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildCharacteristicBar(String label, int value) {
+class _BuildCharacteristicBar extends StatelessWidget {
+  final String label;
+  final int value;
+
+  const _BuildCharacteristicBar({
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -205,8 +254,16 @@ class CatDetail extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLinkButton(String label, String? url, BuildContext context) {
+class _BuildLinkButton extends StatelessWidget {
+  final String label;
+  final String url;
+
+  const _BuildLinkButton({required this.label, required this.url});
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: Tooltip(

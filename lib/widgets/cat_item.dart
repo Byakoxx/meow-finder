@@ -15,7 +15,6 @@ class CatItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        print('se presiona');
         Navigator.pushNamed(
           context,
           '/detail',
@@ -38,7 +37,7 @@ class CatItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    catBreed.name ?? 'Sin nombre',
+                    catBreed.name ?? 'Not Name',
                     style: theme.textTheme.bodyLarge?.copyWith(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,

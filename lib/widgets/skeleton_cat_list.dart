@@ -10,7 +10,6 @@ class SkeletonCatList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool enabled = true;
-    final theme = Theme.of(context);
 
     return Skeletonizer(
       enabled: enabled,
@@ -18,13 +17,19 @@ class SkeletonCatList extends StatelessWidget {
       child: ListView.builder(
         itemCount: 6,
         itemBuilder: (context, index) {
-          return _container(theme);
+          return const _ContainerSkeleton();
         },
       ),
     );
   }
+}
 
-  _container(ThemeData theme) {
+class _ContainerSkeleton extends StatelessWidget {
+  const _ContainerSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(

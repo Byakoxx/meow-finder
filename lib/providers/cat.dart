@@ -1,8 +1,8 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:meow_finder/models/cat_breed.dart';
+
 import 'package:meow_finder/services/cat.dart';
 import 'package:meow_finder/widgets/cat_item.dart';
+import 'package:meow_finder/models/cat_breed.dart';
 
 class CatProvider with ChangeNotifier {
   List<CatBreed> _allCats = [];
@@ -28,10 +28,11 @@ class CatProvider with ChangeNotifier {
     try {
       _allCats = await ApiService().fetchCatBreeds();
       _filteredCats = List.from(_allCats);
-      _listKey?.currentState?.insertAllItems(0, _filteredCats.length, duration: const Duration(milliseconds: 300));
+      _listKey?.currentState?.insertAllItems(0, _filteredCats.length,
+          duration: const Duration(milliseconds: 300));
     } catch (error) {
       _error = error.toString();
-      log('$error');
+      print('$error');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -63,7 +64,6 @@ class CatProvider with ChangeNotifier {
     for (int i = 0; i < minLength; i++) {
       if (_filteredCats[i] != newFilteredCats[i]) {
         _filteredCats[i] = newFilteredCats[i];
-        _listKey?.currentState?.setState(() {});
       }
     }
 
@@ -80,7 +80,8 @@ class CatProvider with ChangeNotifier {
     // Insert new items
     for (int i = oldLength; i < newLength; i++) {
       _filteredCats.insert(i, newFilteredCats[i]);
-      _listKey?.currentState?.insertItem(i, duration: const Duration(milliseconds: 300));
+      _listKey?.currentState
+          ?.insertItem(i, duration: const Duration(milliseconds: 300));
     }
 
     notifyListeners();

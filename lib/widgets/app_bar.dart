@@ -15,6 +15,7 @@ class CustomAppBar extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         bool isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
         return Container(
           padding: const EdgeInsets.only(
             top: 20.0,

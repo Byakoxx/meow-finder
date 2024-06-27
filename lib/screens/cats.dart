@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meow_finder/providers/cat.dart';
+
+import 'package:provider/provider.dart';
 
 import 'package:meow_finder/services/cat.dart';
+import 'package:meow_finder/providers/cat.dart';
 import 'package:meow_finder/widgets/app_bar.dart';
 import 'package:meow_finder/widgets/cat_list.dart';
-import 'package:provider/provider.dart';
 
 class CatsScreen extends StatelessWidget {
   CatsScreen({super.key});
@@ -26,7 +27,7 @@ class CatsScreen extends StatelessWidget {
             }
           },
           child: Consumer<CatProvider>(
-            builder: (_, catProvider, __) {
+            builder: (_, CatProvider catProvider, __) {
               return Container(
                 decoration: BoxDecoration(color: theme.scaffoldBackgroundColor),
                 height: double.infinity,

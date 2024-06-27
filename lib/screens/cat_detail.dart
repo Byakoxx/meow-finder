@@ -271,7 +271,7 @@ class _BuildLinkButton extends StatelessWidget {
         preferBelow: false,
         verticalOffset: 48,
         child: ElevatedButton(
-          onPressed: url != null ? () => _launchURL(url, context) : null,
+          onPressed: () => _launchURL(url, context),
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: _getColorForLabel(label),
